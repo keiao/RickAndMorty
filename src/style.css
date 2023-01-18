@@ -1,0 +1,15 @@
+:root {
+ font-family: 'Montserrat', sans-serif;
+ --one-color: #fff;
+ --two-color: #11555F;
+ --three-color: #7ffa47;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.5;
+}
