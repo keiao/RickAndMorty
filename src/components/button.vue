@@ -1,22 +1,15 @@
 <template>
-  <div>
-    <button @click="onClick">Continuar</button>
-  </div>
+  <button @click="onClick">
+    <slot />
+  </button>
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
-import { useRouter } from 'vue-router';
-
 export default {
-  name: "buttons",
-  setup () {
-    const router = useRouter();
-
-
-    function onClick() {
-      console.log('click')
-      router.push({ path: '/Principal' })
+  setup (props, { emit }) {
+    function onClick(e) {
+      e.preventDefault();
+      emit('click', e)
     }
 
     return {
@@ -27,16 +20,6 @@ export default {
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 50px;
-  right: 0;
-  left: 0;
-}
-
 button {
   background: var(--two-color);
   color: var(--one-color);
@@ -57,6 +40,7 @@ button {
 button:hover {
   color:  var(--two-color);
 }
+
 button:after {
   content: "";
   background: var(--three-color); 
@@ -72,6 +56,7 @@ button:after {
   transform: scale(0, 0);
   transition: all 0.4s ease;
 }
+
 button:hover::after {
   transition: all 0.6s ease-out;
   transform: scale(1, 1);
