@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../../assets/rick-and-morty.svg" class="logo" alt="logoRM" />
+    <img src="../../assets/rick-and-morty.svg" alt="logoRM" />
 
     <h1 class="title">Bienvenido a Rick and Morty</h1>
 
@@ -23,13 +23,13 @@ export default {
   setup() {
     const router = useRouter();
 
-    function onClick () {
+    function onClick() {
       router.push({ path: '/Principal' })
     }
 
     return {
       onClick,
-      onSaludo () {
+      onSaludo() {
         alert('Saludar')
       }
     }
@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .home {
   display: flex;
   flex-direction: column;
@@ -49,18 +48,6 @@ export default {
   background-image: url('../../assets/welcome.svg');
   background-size: cover;
   background-position: center;
-}
-
-.logo {
-  z-index: 1;
-  max-width: 100%;
-}
-
-.svg {
-  position: fixed;
-  left: 0px;
-  top: -100px;
-  z-index: -1;
 }
 
 .title {

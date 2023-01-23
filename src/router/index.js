@@ -10,14 +10,8 @@ const routes = [
   {
     path: '/principal',
     name: 'primary',
-    component: () => import('../modules/pages/PagePrincipal.vue')
+    component: () => import('../modules/home/PagePrincipal.vue')
   },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('../modules/pages/NoPageFound.vue')
-
-  }
 ]
 
 const router = createRouter({

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     function onClick(e) {
       e.preventDefault();
       emit('click', e)
@@ -23,8 +23,8 @@ export default {
 button {
   background: var(--two-color);
   color: var(--one-color);
-  border: none; 
-  border-radius: 60px; 
+  border: none;
+  border-radius: 60px;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -34,16 +34,16 @@ button {
   cursor: pointer;
   font-weight: 300;
   font-size: 18px;
-  
+
 }
 
 button:hover {
-  color:  var(--two-color);
+  color: var(--two-color);
 }
 
 button:after {
   content: "";
-  background: var(--three-color); 
+  background: var(--three-color);
   position: absolute;
   z-index: -1;
   padding: 16px 20px;

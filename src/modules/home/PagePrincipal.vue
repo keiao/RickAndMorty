@@ -2,19 +2,13 @@
   <div class="PrincipalPage">
     <header>
       <div class="searchBar">
-        <div class="iconsSearchBar">
-          <!-- <img src="../../assets/search.svg" alt="search">
-       <img src="../../assets/filter.svg" alt="filter"> -->
-        </div>
-        <input
-          type="search"
-          class="headerInput"
-          placeholder="Buscar personaje"
-        />
+        <input type="search" class="headerInput" placeholder="Buscar personaje" />
       </div>
       <img src="../../assets/bg.svg" class="headerImg" alt="headerImg" />
     </header>
-    <main><h1>titulo</h1></main>
+    <main>
+      <h1>titulo</h1>
+    </main>
     <footer>
       <img src="../../assets/footer.png" alt="" />
     </footer>
@@ -22,7 +16,7 @@
 </template>
 
 <style scoped>
-.PrincipalPage{
+.PrincipalPage {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -37,6 +31,7 @@ header {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background-image: url('../../assets/rick-and-morty.svg');
 }
 
 .searchBar {
@@ -54,16 +49,13 @@ input {
   border-color: var(--one-color);
 }
 
-.headerInput::placeholder {
-  background-image: url(../../assets/search.svg), url(../../assets/filter.svg);
-  background-repeat: no-repeat;
-}
-
 ::placeholder {
   height: 45px;
   color: var(--one-color);
   padding-left: 80px;
   font-size: 18px;
+  background-image: url(../../assets/search.svg), url(../../assets/filter.svg);
+  background-repeat: no-repeat;
 }
 
 .headerImg {
