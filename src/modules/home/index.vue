@@ -13,6 +13,7 @@
     </m-button>
   </div>
 </template>
+
 <script>
 import { useRouter } from 'vue-router';
 import MButton from "../../components/button.vue";
