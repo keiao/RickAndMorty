@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 button {
   background: var(--two-color);
   color: var(--one-color);
@@ -29,12 +29,16 @@ button {
   z-index: 1;
   overflow: hidden;
   display: inline-block;
-  width: 150px;
+  width: 250px;
   height: 50px;
   cursor: pointer;
   font-weight: 300;
   font-size: 18px;
 
+  @media screen and (min-width: 845px) {
+    width: 150px;
+    height: 50px;
+  }
 }
 
 button:hover {

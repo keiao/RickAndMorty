@@ -30,7 +30,7 @@ header {
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  background-image: url('../../assets/header.png');
+  background-image: url('../../assets/headermobil.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -38,8 +38,8 @@ header {
 
   .RickAndMorty {
     z-index: 2;
-    width: 347px;
-    height: 122px;
+    width: 300px;
+    height: 82px;
     margin-top: 80px;
   }
 
@@ -50,6 +50,19 @@ header {
     height: 400px;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1;
+  }
+
+  @media screen and (min-width: 845px) {
+    background-image: url('../../assets/header.png');
+    width: 100%;
+    height: 400px;
+
+    .RickAndMorty {
+      z-index: 2;
+      width: 347px;
+      height: 122px;
+      margin-top: 80px;
+    }
   }
 }
 
@@ -64,26 +77,39 @@ header {
 input {
   font-weight: 200;
   color: var(--one-color);
-  width: 500px;
-  height: 60px;
+  width: 300px;
+  height: 50px;
   background: var(--four-color);
   border-color: var(--one-color);
   background-image: url('../../assets/filter.svg');
   background-repeat: no-repeat;
   background-size: 24px;
-  background-position:  450px;
+  background-position: 260px;
+
+  @media screen and (min-width: 845px) {
+    width: 500px;
+    height: 60px;
+    background-position: 450px;
+  }
 
 }
 
 ::placeholder {
   color: var(--one-color);
-  padding-left: 50px;
-  font-size: 18px;
+  height: 22px;
+  padding-left: 90px;
+  font-size: 14px;
   font-weight: 100;
   background-image: url('../../assets/search.svg');
   background-repeat: no-repeat;
   background-size: 22px;
   background-position: 10px;
+
+  @media screen and (min-width: 845px) {
+    padding-left: 50px;
+    font-size: 18px;
+    font-weight: 100;
+  }
 
 }
 
@@ -98,7 +124,7 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100px;
+  height: 80px;
   z-index: -1;
 
   .suazo {
@@ -109,9 +135,16 @@ footer {
     content: "";
     position: absolute;
     width: 100%;
-    height: 100px;
+    height: 80px;
+    margin: 0;
+    padding: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1;
+  }
+
+  @media screen and (min-width: 845px) {
+    width: 100%;
+    height: 80px;
   }
 }
 </style>
