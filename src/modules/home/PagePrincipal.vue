@@ -7,12 +7,50 @@
       </div>
     </header>
     <main>
+      <div v-if="rickM">
+        <apiPicture :rickAndMortyId="rickM.id" />
+        <h2>{{ rickM.name }}</h2>
+        <apiOptions :rickM="rickArr" />
+        
+      </div>
     </main>
     <footer>
       <img src="../../assets/suazo.svg" class="suazo" alt="suazo">
     </footer>
   </div>
 </template>
+
+<script>
+import apiPicture from "../../components/apiPicture.vue";
+import apiOptions from "../../components/apiOptions.vue";
+
+
+import getRickAndMortyOptions from "../../helpers/getRickAndMortyOptions";
+
+
+export default {
+  components: { apiPicture, apiOptions },
+  data() {
+    return {
+      rickArr: [],
+      rickM: null
+    }
+  },
+  methods: {
+    async mixRickArray() {
+      this.rickArr = await getRickAndMortyOptions()
+    
+      const rndInt = Math.floor( Math.random() * 4 )
+      this. rickM = this.rickArr[ rndInt ]
+  }
+},
+
+  mounted() {
+    this.mixRickArray()
+  }
+
+  }
+</script>
 
 <style lang="scss" scoped>
 .Page {
