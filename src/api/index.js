@@ -1,0 +1,1 @@
+export { characterClient } from './client/character.client';
