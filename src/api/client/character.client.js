@@ -4,7 +4,7 @@ export const characterClient = {
   getCharacter (id) {
     return API.get(`character/${id}`)
   },
-  getCharacters () {
-    return API.get('character')
+  getCharacters (params) {
+    return API.get('character', params)
   }
 }

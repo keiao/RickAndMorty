@@ -7,8 +7,9 @@
 
       <div class="search">
         <div class="iconsInput">
-          <img src="../../assets/search.svg" class="searchSvg" alt="search">
-          <input type="text" placeholder="Buscar personaje" />
+          <button class="searchSvg" v-on:click="searchData"> <img src="../../assets/search.svg" alt="search"> </button>
+
+          <input v-model="search" type="text" v-on:keyup.enter="searchData" placeholder="Buscar personaje" />
           <img src="../../assets/filter.svg" class="filterSvg" alt="filter">
         </div>
       </div>
@@ -27,21 +28,37 @@
       </div>
 
       <div class="cards">
-        <div class="cards-container" v-for=" character in characters">
+
+        <div class="cards-container" v-for=" character in characters" :key="character.id">
           <div class="characterImg">
             <img :src="character.image" alt="characterImg">
           </div>
+
           <div class="cardsTexts">
             <div class="card-status">
-              <div id="circle"></div>{{ character.status }} - {{ character.species }}
+              <div class="circle"></div>{{ character.status }} - {{ character.species }}
             </div>
             <h5 class="card-name">{{ character.name }}</h5>
             <p class="card-text">{{ character.type }}</p>
             <p class="card-text">{{ character.gender }}</p>
+
+            <p>Last known location:</p>
+            <p class="card-text">{{ character.location.name }}</p>
           </div>
         </div>
       </div>
 
+      <nav class="pagination">
+        <a class="ButtonsPagination" v-on:click="changePage(page - 1);">Anterior</a>
+
+        <ul class="paginationList">
+          <li>
+            <a class="pLiNK">{{ page }}</a>
+          </li>
+        </ul>
+
+        <a class="ButtonsPagination" v-on:click="changePage(page + 1);">Siguiente</a>
+      </nav>
     </main>
     <footer>
       <img src="../../assets/suazo.svg" class="suazo" alt="suazo">
@@ -50,6 +67,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { characterClient } from "../../api"
 
@@ -57,11 +75,30 @@ export default {
   setup() {
     const characters = ref([])
     const character = ref(null);
-    
+    const page =  ref(1);
+    const pages = ref(1);
+    const search = ref("");
+
+
+    function changePage(page) {
+      page.value = page.value <= 0 || page.value > pages.value ? page.value : page.value;
+      getCharacters();
+    };
+
+    function searchData() {
+      page.value = 1
+      getCharacters();
+    }
+
 
     async function getCharacters() {
-      const { data } = await characterClient.getCharacters();
+      const { data } = await characterClient.getCharacters({
+        page: page.value,
+        name: search.value
+      });
       characters.value = data.results;
+      pages.value = data.info.pages;
+      console.log(data);
     }
 
 
@@ -69,11 +106,15 @@ export default {
       getCharacters();
     })
 
-   
 
     return {
       characters,
       character,
+      searchData,
+      changePage,
+      page,
+      pages,
+      search,
     }
   }
 
@@ -154,22 +195,29 @@ header {
 
     .searchSvg {
       position: absolute;
-      left: 18px;
+      left: 8px;
       z-index: 2;
+      background: none;
+      border: none;
+      width: 30px;
+      height: auto;
     }
 
     .filterSvg {
       position: absolute;
       right: 18px;
       z-index: 2;
+      width: 22px;
+      height: auto;
     }
   }
 
   input {
     font-weight: 200;
     color: var(--one-color);
-    width: 300px;
+    width: 150px;
     height: 50px;
+    padding: 0px 60px;
     background-color: var(--four-color);
     border: 2px solid var(--one-color);
     border-radius: 6px;
@@ -179,18 +227,32 @@ header {
   ::placeholder {
     color: var(--one-color);
     height: 22px;
-    padding-left: 90px;
     font-size: 14px;
     font-weight: 100;
   }
 
   @media screen and (min-width: 845px) {
+    .iconsInput {
+    .searchSvg {
+      left: 8px;
+      border: none;
+      width: 36px;
+      height: auto;
+    }
+
+    .filterSvg {
+      right: 18px;
+      width: 25px;
+      height: auto;
+    }
+  }
     input {
       width: 300px;
       height: 60px;
       padding: 0px 80px;
-
     }
+
+  
 
     ::placeholder {
       padding: 0;
@@ -262,18 +324,14 @@ main {
     justify-content: center;
 
     img {
-      border-radius: 10% 10% 0 0;
+      border-radius: 15px 15px 0 0;
     }
   }
 
   .cardsTexts {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
     border: 1px solid var(--five-color);
-    border-radius: 0 0 10% 10%;
+    gap: 8px;
+    padding: 15px 5px;
 
     .card-text {
       color: var(--seven-color);
@@ -281,16 +339,15 @@ main {
 
     .card-status {
       display: flex;
-      justify-content: center;
       align-items: center;
       color: var(--seven-color);
       gap: 5px;
     }
 
-    #circle {
+    .circle {
       width: 10px;
       height: 10px;
-      background-color: aqua;
+      background-color: #27AE60;
       border-radius: 50%;
     }
   }
@@ -299,6 +356,7 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     max-width: 1200px;
+    padding: 0px 15px;
 
     .cards-container {
       flex-direction: row;
@@ -312,13 +370,7 @@ main {
 
     .cardsTexts {
       width: 100%;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 10px;
-      border-radius: 0 10% 10% 0;
+      border-radius: 0 20px 20px 0;
 
       .card-name {
         font-size: 20px;
@@ -326,6 +378,40 @@ main {
       }
     }
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 0;
+  margin: 20px 0px;
+
+  .ButtonsPagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--two-color);
+    border-radius: 50px;
+    width: 120px;
+    height: 50px;
+    color: var(--two-color);
+    cursor: pointer;
+  }
+
+  .pLiNK {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--two-color);
+    color: var(--one-color);
+  }
+
+  @media screen and (min-width: 845px) {
+    gap: 50px;
+  }
+
+
 }
 
 
