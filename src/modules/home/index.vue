@@ -11,21 +11,24 @@
     <m-button class="Mbutton" @click="onClick">
       Continuar
     </m-button>
+    
   </div>
 </template>
 
 <script>
 import { useRouter } from 'vue-router';
 import MButton from "../../components/button.vue";
+import Buttons from '../../components/main/buttons.vue';
 export default {
   components: {
     MButton,
+    Buttons
   },
   setup() {
     const router = useRouter();
 
     function onClick() {
-      router.push({ path: '/Principal' })
+      router.push({ name: 'primary' })
     }
 
     return {

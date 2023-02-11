@@ -5,9 +5,10 @@
   --three-color: #7ffa47;
   --four-color: #081f32;
   --five-color: #BDBDBD;
-  --six-color: #F2F2F2;
+  --six-color: #e2e2e2;
   --seven-color: #4F4F4F;
-  --maxw: 1440px;
+  --eight-color: #27ae60;
+  --maxw: 1280px;
 }
 
 
@@ -122,6 +123,11 @@ section {
 body {
   line-height: 1;
 }
+
+a{
+  text-decoration: none;
+}
+
 ol,
 ul {
   list-style: none;
