@@ -57,9 +57,10 @@ export default {
   .buttonMain {
     border: none;
     background: none;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     color: #000;
+    padding: 18px 0px;
     &:hover {
      border-bottom: 1px solid #34C759;
     }
@@ -71,11 +72,11 @@ export default {
       height: 80px;
       width: 100%;
       max-width: 1200px;
-      padding: 0;
     }
 
-    .ButtonMain {
+    .buttonMain {
       font-size: 18px;
+      padding: 30px 50px;
     }
   }
 }
