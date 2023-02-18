@@ -48,65 +48,6 @@
         </div>
       </div>
 
-      <modal @Click="toggleModal" :modalActive="modalActive" class="modalM">
-
-        <!-- <img class="closeButton" src="../../assets/closet.svg" alt=""> -->
-
-        <div class="Perfil">
-          <img  class="circleImg" :src="character.image" alt="characterImg">
-          <span class="perfilText">{{ character.status }}</span>
-          <h3 class="perfilName">{{ character.name }}</h3>
-          <span class="perfilText">{{ character.species }}</span>
-        </div>
-
-        <div class="informacion">
-          <h2 class="infoH2">Información</h2>
-
-          <section class="infoContainer">
-            <div class="infoBorder">
-              <h5 class="infoName">
-                <img src="../../assets/i.svg" alt="">
-                Gender
-              </h5>
-              <span class="infoText">{{ character.gender }}</span>
-            </div>
-
-            <div class="infoBorder">
-              <h5 class="infoName">
-                <img src="../../assets/i.svg" alt="">
-                Origin
-              </h5>
-              <span class="infoText">{{ character?.origin?.name }}</span>
-            </div>
-
-            <div class="infoBorder">
-              <h5 class="infoName">
-                <img src="../../assets/i.svg" alt="">
-                Type
-              </h5>
-              <span class="infoText">{{ character.type }}</span>
-            </div>
-
-          </section>
-        </div>
-
-        <div class="episodios">
-          <h2 class="epiH2">Episodios</h2>
-
-          <section class="epiContainer">
-
-            <div class="epiBorder">
-              <h5 class="epiName">
-                pilot
-              </h5>
-              <div>{{ character?.episode?.name }}</div>
-            </div>
-          </section>
-        </div>
-
-        <button class="mdButton">Compartir personaje</button>
-      </modal>
-
       <nav class="pagination">
         <button class="ButtonsPagination" v-on:click="prevPage">Anterior</button>
 
@@ -123,38 +64,41 @@
     <footer>
       <img src="../../assets/suazo.svg" class="suazo" alt="suazo">
     </footer>
+
+
+    <ModalCharacter v-model="modalActive" :character="character" />
   </div>
 </template>
 
 <script>
-
-import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { characterClient } from "../../api";
 import Buttons from '../../components/main/buttons.vue'
-import modal from '../../components/main/modal.vue';
+import ModalCharacter from './sections/modalCharacter.vue';
+
 
 export default {
   components: {
     Buttons,
-    modal,
-  },
+    ModalCharacter
+},
   setup() {
     const characters = ref([])
-    const character = ref("");
+    const character = ref(null);
     const page = ref(1);
     const pages = ref(1);
     const search = ref("");
     const modalActive = ref(false);
 
     async function toggleModal(id) {
-      modalActive.value = !modalActive.value;
+      modalActive.value = !modalActive.value
 
       if (typeof id === 'number') {
         const { data } = await characterClient.getCharacter(id)
         character.value = data
       }
     }
+
     function prevPage() {
       if (page.value > 1) {
         page.value -= 1;

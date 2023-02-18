@@ -1,24 +1,37 @@
 <template>
-  <div v-show="modalActive" class="modal">
-    <div v-show="modalActive" class="modalContent">
-      <div class="portadaModal">
-        <button @click="closeClick" type="button" class="closeButton">
-          <img src="../../assets/closet.svg" alt="">
-        </button>
-      </div>
-      <div class="boxColor"></div>
+  <div v-if="modalActive" class="modal">
+    <div class="modalContent">
+      <button @click="closeClick" type="button" class="closeButton">
+        <img src="../../assets/closet.svg">
+      </button>
       <slot />
     </div>
 </div>
 </template>
 
 <script>
+import { watch } from "vue";
+
 export default {
-  props: ["modalActive"],
+  props: {
+    modalActive: {
+      type: Boolean,
+      default: false,
+    }
+  },
   setup(props, { emit }) {
+    const bodyHtml = document.querySelector('body');
+
+    watch(() => props.modalActive, (isActive) => {
+      if (isActive) {
+        bodyHtml.style.overflow = 'hidden';
+      } else {
+        bodyHtml.style.overflow = 'inherit';
+      }
+    })
+
     function closeClick(e){
-      e.preventDefault();
-      emit('click', e)
+      emit('close', e)
     }
     return {
       closeClick,
@@ -53,39 +66,14 @@ export default {
   position: relative;
   background-color: var(--one-color);
   width: 350px;
-  height: 600px;
+  height: 80%;
+  overflow-y: auto;
 
   @media screen and (min-width: 845px){
     width: 740px;
-    height: 750px;
   }
 }
 
-.portadaModal {
-  background-image: url("../../assets/bgModal.png");
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 150px;
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 150px;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-  }
-
-  @media screen and (min-width: 845px){
-    width: 100%;
-    height: 220px;
-
-    &::after {
-    height: 220px;
-  }
-  }
-
-}
 .closeButton {
   position: absolute;
   right: 10px;
@@ -94,15 +82,6 @@ export default {
   border: none;
   cursor: pointer;
   z-index: 2;
-}
-
-.boxColor {
-  background-color: var(--six-color);
-  padding: 30px 175px;
-
-  @media screen and (min-width: 845px){
-    padding: 60px 370px;
-  }
 }
 
 
