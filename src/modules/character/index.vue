@@ -50,13 +50,7 @@
 
       <nav class="pagination">
         <button class="ButtonsPagination" v-on:click="prevPage">Anterior</button>
-
-        <ul class="paginationList">
-          <li>
-            <a class="pLiNK">{{ page }}</a>
-          </li>
-        </ul>
-
+        <a class="pLiNK">{{ page }}</a>    
         <button class="ButtonsPagination" v-on:click="nextPage">Siguiente</button>
       </nav>
     </main>
@@ -81,7 +75,7 @@ export default {
   components: {
     Buttons,
     ModalCharacter
-},
+  },
   setup() {
     const characters = ref([])
     const character = ref(null);
@@ -117,10 +111,10 @@ export default {
       if (char) {
         page.value = 1
         getCharacters();
-      }else{
+      } else {
         console.log("no se encuentra");
       }
-      
+
     }
 
     function onClick(name) {

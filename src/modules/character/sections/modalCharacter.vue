@@ -1,74 +1,73 @@
 <template>
-<modal @close="closeModal" :modalActive="modelValue" class="modalM">
+  <modal @close="closeModal" :modalActive="modelValue" class="modalM">
 
-  <div class="portadaModal">
-    <img class="modalBanner" src="../../../assets/bgModal.png" alt="banner modal">
-  </div>
-
-  <div class="boxColor">
-    <div class="perfil">
-      <img  class="circleImg" :src="character?.image" alt="characterImg">
-      <span class="perfilText">{{ character?.status }}</span>
-      <h3 class="perfilName">{{ character?.name }}</h3>
-      <span class="perfilText">{{ character?.species }}</span>
+    <div class="portadaModal">
+      <img class="modalBanner" src="../../../assets/bgModal.png" alt="banner modal">
     </div>
-  </div>
 
-  <div class="content">
+    <div class="boxColor">
+      <div class="perfil">
+        <img class="circleImg" :src="character?.image" alt="characterImg">
+        <span class="perfilText">{{ character?.status }}</span>
+        <h3 class="perfilName">{{ character?.name }}</h3>
+        <span class="perfilText">{{ character?.species }}</span>
+      </div>
+    </div>
 
-    <div class="information">
-      <h2 class="infoH2">Información</h2>
-  
-      <section class="infoContainer">
-        <div class="infoBorder">
-          <h5 class="infoName">
-            <img src="../../../assets/i.svg" alt="">
-            Gender
-          </h5>
-          <span class="infoText">{{ character?.gender }}</span>
-        </div>
-  
-        <div class="infoBorder">
-          <h5 class="infoName">
-            <img src="../../assets/i.svg" alt="">
-            Origin
-          </h5>
-          <span class="infoText">{{ character?.origin?.name }}</span>
-        </div>
-  
-        <div class="infoBorder">
-          <h5 class="infoName">
-            <img src="../../assets/i.svg" alt="">
-            Type
-          </h5>
-          <span class="infoText">{{ character?.type }}</span>
-        </div>
-  
-      </section>
+    <div class="content">
+
+      <div class="information">
+        <h2 class="infoH2">Información</h2>
+
+        <section class="infoContainer">
+          <div class="infoBorder">
+            <h5 class="infoName">
+              <img src="../../../assets/information.svg">
+              Gender
+            </h5>
+            <span class="infoText">{{ character?.gender }}</span>
+          </div>
+
+          <div class="infoBorder">
+            <h5 class="infoName">
+              <img src="../../../assets/information.svg">
+              Origin
+            </h5>
+            <span class="infoText">{{ character?.origin?.name }}</span>
+          </div>
+
+          <div class="infoBorder">
+            <h5 class="infoName">
+              <img src="../../../assets/information.svg">
+              Type
+            </h5>
+            <span class="infoText">{{ character?.type }}</span>
+          </div>
+
+        </section>
+      </div>
+
+      <div class="episodios">
+        <h2 class="epiH2">Episodios</h2>
+
+        <section class="epiContainer">
+          <div v-for="(episode, index) in episodes" :key="episode.id" class="epiContent">
+            <div class="epiText">{{ episode.name }}</div>
+            <div class="epiEpisodios"> {{ episode.episode }}</div>
+            <div class="epiText"> {{ episode.air_date }}</div>
+          </div>
+        </section>
+      </div>
     </div>
-  
-    <div class="episodios">
-      <h2 class="epiH2">Episodios</h2>
-  
-      <section class="epiContainer">
-  
-        <div class="epiBorder">
-          <h5 class="epiName">
-            pilot
-          </h5>
-          <div>{{ character?.episode?.name }}</div>
-        </div>
-      </section>
-    </div>
-  
     <button class="mdButton">Compartir personaje</button>
-  </div>
 
-</modal>
+  </modal>
 </template>
 
 <script>
+import { computed, watch, ref } from "vue";
 import modal from '../../../components/main/modal.vue';
+import { episodeClient } from './../../../api'
 export default {
   props: {
     character: {
@@ -85,6 +84,30 @@ export default {
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    const episodes = ref(null);
+
+    const characterEpisodesId = computed(() => {
+      if (!props.character) return [];
+      return props.character.episode.map((char) => char.split('/').at(-1))
+    })
+
+    watch(characterEpisodesId, (isCharacterId) => {
+      if (isCharacterId.length) {
+        characterEpisodes();
+      }
+    })
+
+    async function characterEpisodes() {
+      const promises = characterEpisodesId.value.map(async (id) => {
+        const episode = await episodeClient.getEpisode(id);
+        return episode;
+      });
+
+      const resultEposides = await Promise.allSettled(promises);
+
+
+      episodes.value = resultEposides.map(episode => episode.value.data);
+    }
 
     async function closeModal() {
       emit('update:modelValue', false)
@@ -92,6 +115,8 @@ export default {
 
     return {
       closeModal,
+      characterEpisodesId,
+      episodes,
     }
   }
 }
@@ -100,15 +125,47 @@ export default {
 
 
 <style lang="scss" scoped>
+.portadaModal {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  @media screen and (min-width: 700px) {
+    &::after {
+      height: 100%;
+    }
+  }
+
+}
+
+.modalBanner {
+  object-fit: cover;
+  object-position: center;
+  height: 150px;
+
+  @media screen and (min-width: 700px) {
+    height: 100%;
+  }
+}
+
 .boxColor {
   position: static;
   z-index: 10;
   background-color: var(--six-color);
-  padding: 30px 0;
+  padding: 15px 0;
   width: 100%;
 
-  @media screen and (min-width: 845px){
-    padding: 30px  0;
+  @media screen and (min-width: 700px) {
+    padding: 20px 0;
   }
 }
 
@@ -117,9 +174,9 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   z-index: 2;
-  margin-top: -130px;
+  margin-top: -100px;
 
   .circleImg {
     border-radius: 50%;
@@ -138,15 +195,17 @@ export default {
     color: var(--seven-color);
   }
 
-  @media screen and (min-width: 845px) {
-    top: -350px;
-    gap: 10px;
+  @media screen and (min-width: 700px) {
+    margin-top: -120px;
+
     .circleImg {
       width: 155px;
     }
+
     .perfilName {
       font-size: 20px;
     }
+
     .perfilText {
       font-size: 14px;
     }
@@ -155,17 +214,15 @@ export default {
 
 .information {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 0;
   padding: 20px 0px 30px 0px;
   border-bottom: 1px solid var(--five-color);
   width: 300px;
 
   .infoContainer {
     display: flex;
-    gap: 5px;
+    justify-content: center;
+    gap: 30px;
   }
 
   .infoH2 {
@@ -192,21 +249,19 @@ export default {
     font-weight: 500;
   }
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     display: block;
     padding: 20px 0px 30px 0px;
     width: 650px;
 
     .infoContainer {
       justify-content: space-around;
-      align-items: center;
       flex-direction: row;
     }
 
     .infoH2 {
       font-size: 23px;
       margin-left: -20px;
-      margin-bottom: 20px;
     }
 
     .infoBorder {
@@ -214,6 +269,7 @@ export default {
       padding: 15px 40px;
       border-radius: 8px;
     }
+
     .infoText {
       font-size: 17px;
       font-weight: 500;
@@ -221,54 +277,51 @@ export default {
   }
 }
 
-.episodios{
+.episodios {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 0;
-  padding: 10px 0px 30px 0px;
+  padding: 20px 0px 30px 0px;
   border-bottom: 1px solid var(--five-color);
   width: 300px;
 
   .epiContainer {
-    display: flex;
-    gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .epiH2 {
     font-size: 18px;
     margin-bottom: 20px;
+
   }
 
-  .epiBorder {
-    border: 1px solid var(--five-color);
-    padding: 10px 10px;
-    border-radius: 8px;
-  }
-
-  .epiName {
-    font-size: 11px;
-    color: var(--seven-color);
+  .epiContent {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 3px;
+    border: 1px solid var(--five-color);
+    border-radius: 8px;
+    padding: 15px;
   }
 
   .epiText {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 11px;
+    color: var(--seven-color);
   }
 
-  @media screen and (min-width: 845px) {
+  .epiEpisodios {
+    font-size: 16px;
+    font-weight: 500;
+    gap: 5;
+  }
+
+  @media screen and (min-width: 700px) {
     display: block;
-    padding: 20px 0px 30px 0px;
     width: 650px;
 
     .epiContainer {
-      justify-content: space-around;
-      align-items: center;
-      flex-direction: row;
+      grid-template-columns: repeat(4, 1fr)
     }
 
     .epiH2 {
@@ -277,12 +330,12 @@ export default {
       margin-bottom: 20px;
     }
 
-    .epiName {
-      padding: 15px 40px;
-      border-radius: 8px;
-    }
     .epiText {
-      font-size: 17px;
+      width: 100%;
+    }
+
+    .epiEpisodios {
+      font-size: 18px;
       font-weight: 500;
     }
   }
@@ -297,77 +350,13 @@ export default {
   color: var(--one-color);
   border: none;
   border-radius: 60px;
-  width: 180px;
-  height: 42px;
+  padding: 15px 30px;
   font-size: 15px;
-  z-index: 2;
-  margin-top: 80px;
+  margin: 30px;
 
-  @media screen and (min-width: 845px) {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-  }
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  margin-top: auto;
-  background-image: url("../../assets/footer.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 80px;
-  z-index: -1;
-
-  .suazo {
-    z-index: 2;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 80px;
-    margin: 0;
-    padding: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-  }
-
-  @media screen and (min-width: 845px) {
-    width: 100%;
-    height: 80px;
-  }
-}
-
-
-.portadaModal {
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-  }
-
-}
-
-.modalBanner {
-  object-fit: cover;
-  object-position: center;
-  height: 150px;
-  @media screen and (min-width: 845px){
-    height: 220px;
+  @media screen and (min-width: 700px) {
+    padding: 18px 30px;
+    margin-left: 480px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../../assets/rick-and-morty.svg" class="RM" alt="logoRM" />
+    <img src="../../assets/rick-and-morty.svg" class="rMorty" alt="logoRM" />
 
     <h1 class="title">Bienvenido a Rick and Morty</h1>
 
@@ -11,7 +11,7 @@
     <m-button class="Mbutton" @click="onClick">
       Continuar
     </m-button>
-    
+
   </div>
 </template>
 
@@ -48,17 +48,14 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0;
-  padding: 30px 25px;
   min-height: 100vh;
   background-image: url('../../assets/welcomeMobil.jpg');
   background-size: cover;
   background-position: center;
 
-  .RM {
+  .rMorty {
     z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 320px;
   }
 
   &::after {
@@ -69,11 +66,21 @@ export default {
     height: 100vh;
     background: rgba(0, 0, 0, 0.8);
     z-index: 1;
-    padding-bottom: 60px;
   }
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     background-image: url('../../assets/welcome.jpg');
+    padding: 30px 25px;
+
+    &::after {
+      padding-bottom: 60px;
+    }
+
+    .rMorty {
+      width: 600px;
+      margin-top: 80px;
+    }
+
   }
 
 }
@@ -81,15 +88,15 @@ export default {
 .title {
   color: var(--one-color);
   font-weight: 300;
-  font-size: 26px;
+  font-size: 23px;
   text-align: center;
   margin: 30px;
   z-index: 2;
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     font-weight: 300;
     font-size: 36px;
-    margin: -10px 0px 30px 0px;
+    margin: -20px 0px 20px;
   }
 }
 
@@ -97,20 +104,18 @@ export default {
   text-align: center;
   color: var(--one-color);
   font-weight: 300;
-  font-size: 18px;
-  margin-bottom: 50px;
+  font-size: 16px;
   line-height: 1.7;
   z-index: 2;
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     max-width: 55%;
-    text-align: center;
     font-size: 18px;
-    margin-bottom: 30px;
   }
 }
 
 .Mbutton {
   z-index: 2;
+  margin-top: 30px;
 }
 </style>

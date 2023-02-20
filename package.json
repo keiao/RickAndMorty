@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/server": "^4.3.1",
     "axios": "^1.2.5",
+    "dayjs": "^1.11.7",
     "graphql": "^16.6.0",
     "vue": "^3.2.45",
     "vue-router": "4"

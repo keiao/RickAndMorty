@@ -54,7 +54,7 @@ export default {
   justify-content: center;
   align-items: center;
 
-  @media screen and (min-width: 845px){
+  @media screen and (min-width: 700px){
     position: fixed;
   }
 }
@@ -66,10 +66,10 @@ export default {
   position: relative;
   background-color: var(--one-color);
   width: 350px;
-  height: 80%;
+  height: 85%;
   overflow-y: auto;
 
-  @media screen and (min-width: 845px){
+  @media screen and (min-width: 700px){
     width: 740px;
   }
 }

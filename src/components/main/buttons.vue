@@ -10,7 +10,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 
@@ -40,8 +39,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
   }
 
   .buttonsContainer {
@@ -59,18 +56,18 @@ export default {
     background: none;
     font-size: 15px;
     cursor: pointer;
-    color: #000;
+    color: var(--four-color);
     padding: 18px 0px;
+
     &:hover {
-     border-bottom: 1px solid #34C759;
+      border-bottom: 1px solid var(--eight-color);
     }
   }
 
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     .buttonsContainer {
       height: 80px;
-      width: 100%;
       max-width: 1200px;
     }
 

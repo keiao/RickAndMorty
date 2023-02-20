@@ -18,25 +18,30 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 400px;
+  height: 350px;
 
   .RickAndMorty {
-    z-index: 2;
     width: 300px;
     height: 82px;
-    margin-top: 80px;
+  }
+
+  .headerLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
   }
 
   &::after {
     content: "";
     position: absolute;
     width: 100%;
-    height: 400px;
+    height: 350px;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
   }
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     background-image: url("../../assets/header.png");
     width: 100%;
     height: 400px;
@@ -47,15 +52,11 @@ header {
       height: 122px;
       margin-top: 80px;
     }
-  }
-}
 
-.headerLogo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 2;
+    &::after {
+      height: 400px;
+    }
+  }
 }
 
 .search {
@@ -69,24 +70,24 @@ header {
     align-items: center;
     position: relative;
     z-index: 2;
+  }
 
-    .searchSvg {
-      position: absolute;
-      left: 8px;
-      z-index: 2;
-      background: none;
-      border: none;
-      width: 30px;
-      height: auto;
-    }
+  .searchSvg {
+    position: absolute;
+    left: 8px;
+    z-index: 2;
+    background: none;
+    border: none;
+    width: 30px;
+    height: auto;
+  }
 
-    .filterSvg {
-      position: absolute;
-      right: 18px;
-      z-index: 2;
-      width: 22px;
-      height: auto;
-    }
+  .filterSvg {
+    position: absolute;
+    right: 18px;
+    z-index: 2;
+    width: 22px;
+    height: auto;
   }
 
   input {
@@ -108,20 +109,18 @@ header {
     font-weight: 100;
   }
 
-  @media screen and (min-width: 845px) {
-    .iconsInput {
-      .searchSvg {
-        left: 8px;
-        border: none;
-        width: 36px;
-        height: auto;
-      }
+  @media screen and (min-width: 700px) {
+    .searchSvg {
+      left: 8px;
+      border: none;
+      width: 36px;
+      height: auto;
+    }
 
-      .filterSvg {
-        right: 18px;
-        width: 25px;
-        height: auto;
-      }
+    .filterSvg {
+      right: 18px;
+      width: 30px;
+      height: auto;
     }
     input {
       width: 300px;
@@ -159,7 +158,7 @@ header {
     }
   }
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     .filterButton {
       width: 470px;
       height: 33px;
@@ -183,13 +182,6 @@ main {
   margin: 30px 0px;
   gap: 30px;
 
-  .buttonCharacters {
-    border: none;
-    width: 100%;
-    padding: 0;
-    cursor: pointer;
-  }
-
   .cardsContainer {
     display: flex;
     flex-direction: column;
@@ -198,8 +190,6 @@ main {
 
   .characterImg {
     display: flex;
-    justify-content: center;
-
     img {
       border-radius: 15px 15px 0 0;
     }
@@ -229,7 +219,7 @@ main {
     .circle {
       width: 10px;
       height: 10px;
-      background-color: red;
+      background-color: var(--nine-color);
       border-radius: 50%;
       &.active {
         background-color: var(--eight-color);
@@ -283,16 +273,13 @@ main {
   align-items: center;
   gap: 30px;
   padding: 0;
-  margin: 20px 0px;
+  margin-bottom: 20px;
 
   .ButtonsPagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: 1px solid var(--two-color);
     border-radius: 50px;
     width: 100px;
-    height: 30px;
+    height: 35px;
     color: var(--two-color);
     cursor: pointer;
   }
@@ -302,7 +289,35 @@ main {
     color: var(--two-color);
   }
 
-  @media screen and (min-width: 845px) {
+  @media screen and (min-width: 700px) {
     gap: 50px;
+  }
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  background-image: url("../../assets/footer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 80px;
+
+  .suazo {
+    z-index: 2;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  @media screen and (min-width: 700px) {
+    width: 100%;
+    height: 80px;
   }
 }
