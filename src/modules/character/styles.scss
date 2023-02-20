@@ -1,108 +1,95 @@
-.Page {
+.page {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
-  width: 100%;
 }
 
 header {
+  position: relative;
   display: flex;
   justify-content: center;
-  align-content: center;
-  flex-direction: column;
+  align-items: center;
   background-image: url("../../assets/headermobil.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   height: 350px;
-
-  .RickAndMorty {
-    width: 300px;
-    height: 82px;
-  }
-
-  .headerLogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 2;
-  }
 
   &::after {
     content: "";
     position: absolute;
     width: 100%;
-    height: 350px;
+    height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 5;
   }
 
   @media screen and (min-width: 700px) {
     background-image: url("../../assets/header.png");
-    width: 100%;
     height: 400px;
-
-    .RickAndMorty {
-      z-index: 2;
-      width: 347px;
-      height: 122px;
-      margin-top: 80px;
-    }
-
-    &::after {
-      height: 400px;
-    }
   }
 }
 
-.search {
+.header__content {
+  position: relative;
+  z-index: 20;
+  padding: 0 20px;
+}
+
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
 
-  .iconsInput {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+.rickAndMorty {
+  width: 300px;
+  height: 82px;
+  @media screen and (min-width: 700px) {
+    width: 347px;
+    height: 122px;
   }
+}
 
-  .searchSvg {
-    position: absolute;
-    left: 8px;
-    z-index: 2;
-    background: none;
-    border: none;
+
+.search__content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 8px;
+  width: 30px;
+  @media screen and (min-width: 700px) {
+    width: 36px;
+  }
+}
+
+.filterIcon {
+  position: absolute;
+  right: 18px;
+  width: 22px;
+  @media screen and (min-width: 700px) {
     width: 30px;
-    height: auto;
   }
+}
 
-  .filterSvg {
-    position: absolute;
-    right: 18px;
-    z-index: 2;
-    width: 22px;
-    height: auto;
-  }
+input {
+  font-weight: 200;
+  color: var(--one-color);
+  width: 100%;
+  height: 50px;
+  padding: 0px 60px;
+  background-color: var(--four-color);
+  border: 2px solid var(--one-color);
+  border-radius: 6px;
+  font-size: 18px;
 
-  input {
-    font-weight: 200;
-    color: var(--one-color);
-    width: 150px;
-    height: 50px;
-    padding: 0px 60px;
-    background-color: var(--four-color);
-    border: 2px solid var(--one-color);
-    border-radius: 6px;
-    font-size: 18px;
-  }
-
-  ::placeholder {
+  &::placeholder {
     color: var(--one-color);
     height: 22px;
     font-size: 14px;
@@ -110,25 +97,11 @@ header {
   }
 
   @media screen and (min-width: 700px) {
-    .searchSvg {
-      left: 8px;
-      border: none;
-      width: 36px;
-      height: auto;
-    }
+    width: 300px;
+    height: 55px;
+    padding: 0px 80px;
 
-    .filterSvg {
-      right: 18px;
-      width: 30px;
-      height: auto;
-    }
-    input {
-      width: 300px;
-      height: 55px;
-      padding: 0px 80px;
-    }
-
-    ::placeholder {
+    &::placeholder {
       padding: 0;
       font-size: 18px;
       font-weight: 100;

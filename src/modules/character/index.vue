@@ -1,26 +1,27 @@
 <template>
-  <div class="Page">
+  <div class="page">
     <header>
-      <div class="headerLogo">
-        <img src="../../assets/rick-and-morty.svg" class="RickAndMorty" alt="RickAndMorty">
-      </div>
-
-      <div class="search">
-        <div class="iconsInput">
-          <button class="searchSvg" v-on:click="searchData"> <img src="../../assets/search.svg" alt="search"> </button>
-
-          <input v-model="search" type="text" v-on:keyup.enter="searchData" placeholder="Buscar personaje" />
-          <img src="../../assets/filter.svg" class="filterSvg" alt="filter">
+      <div class="header__content">
+        <div class="logo">
+          <img src="../../assets/rick-and-morty.svg" class="rickAndMorty" alt="Rick and Morty">
+        </div>
+  
+        <div class="search">
+          <div class="search__content">
+            <img class="searchIcon" v-on:click="searchData" src="../../assets/search.svg" alt="search">
+  
+            <input v-model="search" type="text" v-on:keyup.enter="searchData" placeholder="Buscar personaje" />
+            <img src="../../assets/filter.svg" class="filterIcon" alt="filter">
+          </div>
+        </div>
+  
+        <div class="filterDesplegable">
+          <button class="filterButton">
+            <span class="filterTextGreen">Filtro aplicados:</span>
+            Status, Origin
+          </button>
         </div>
       </div>
-
-      <div class="filterDesplegable">
-        <button class="filterButton">
-          <span class="filterTextGreen">Filtro aplicados:</span>
-          Status, Origin
-        </button>
-      </div>
-
     </header>
     <main>
       <Buttons @select="getCharacters" />

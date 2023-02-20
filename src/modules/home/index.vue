@@ -19,7 +19,7 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import MButton from "../../components/button.vue";s
+import MButton from "../../components/button.vue";
 export default {
   components: {
     MButton,
