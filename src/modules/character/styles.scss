@@ -44,7 +44,7 @@ header {
   flex-direction: column;
 }
 
-.rickAndMorty {
+.rick_and_morty {
   width: 300px;
   height: 82px;
   @media screen and (min-width: 700px) {
@@ -53,14 +53,13 @@ header {
   }
 }
 
-
 .search__content {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.searchIcon {
+.search__icon {
   position: absolute;
   left: 8px;
   width: 30px;
@@ -69,7 +68,7 @@ header {
   }
 }
 
-.filterIcon {
+.filter__icon {
   position: absolute;
   right: 18px;
   width: 22px;
@@ -109,34 +108,31 @@ input {
   }
 }
 
-.filterDesplegable {
+.dropdown__filter {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   z-index: 2;
   margin-top: 20px;
+}
 
-  .filterButton {
-    text-align: left;
-    padding-left: 15px;
-    width: 270px;
-    height: 33px;
-    border-radius: 6px;
-    border: none;
-    font-size: 16px;
-
-    .filterTextGreen {
-      color: var(--eight-color);
-    }
-  }
-
+.filter__button {
+  text-align: left;
+  padding-left: 15px;
+  width: 270px;
+  height: 33px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
   @media screen and (min-width: 700px) {
-    .filterButton {
-      width: 470px;
-      height: 33px;
-    }
+    width: 470px;
+    height: 33px;
   }
+}
+
+.filter__textGreen {
+  color: var(--eight-color);
 }
 
 main {
@@ -151,92 +147,92 @@ main {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(2, 150px);
+  grid-template-columns: repeat(2, 1fr);
+  width: 80%;
   margin: 30px 0px;
   gap: 30px;
-
-  .cardsContainer {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-  }
-
-  .characterImg {
-    display: flex;
-    img {
-      border-radius: 15px 15px 0 0;
-    }
-  }
-
-  .cardsTexts {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    border: 1px solid var(--five-color);
-    padding: 15px 5px;
-    text-align: center;
-
-    .cardText {
-      color: var(--seven-color);
-    }
-
-    .cardStatus {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--seven-color);
-      gap: 5px;
-    }
-
-    .circle {
-      width: 10px;
-      height: 10px;
-      background-color: var(--nine-color);
-      border-radius: 50%;
-      &.active {
-        background-color: var(--eight-color);
-      }
-    }
-  }
-
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 1000px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    max-width: var(--maxw);
     padding: 0px 15px;
+  }
+}
 
-    .cardsContainer {
-      flex-direction: row;
+.cards__container {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+  }
+}
+
+
+.card__img {
+  display: flex;
+  img {
+    border-radius: 15px 15px 0 0;
+  }
+  @media screen and (min-width: 700px) {
+    img {
+      border-radius: 10% 0 0 10%;
     }
+  }
+}
 
-    .characterImg {
-      img {
-        border-radius: 10% 0 0 10%;
-      }
-    }
+.cards__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  border: 1px solid var(--five-color);
+  padding: 15px 5px;
+  text-align: center;
+  @media screen and (min-width: 700px) {
+    justify-content: center;
+    text-align: left;
+    padding-left: 17px;
+    gap: 10px;
+    flex: auto;
+    width: 100%;
+    border-radius: 0 20px 20px 0;
+  }
+}
 
-    .cardsTexts {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      padding-left: 17px;
-      gap: 10px;
-      flex: auto;
-      width: 100%;
-      border-radius: 0 20px 20px 0;
+.card-Text {
+  color: var(--seven-color);
+  font-size: 13px;
+  @media screen and (min-width: 700px) {
+    font-size: 16px;
+  }
+}
 
-      .cardName {
-        font-size: 20px;
-      }
+.card-Name {
+  font-size: 18px;
+  @media screen and (min-width: 700px) {
+    font-size: 20px;
+  }
+}
 
-      .cardStatus {
-        display: flex;
-        align-items: center;
-        justify-content: left;
-      }
-    }
+.card__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--seven-color);
+  gap: 5px;
+  @media screen and (min-width: 700px) {
+    display: flex;
+    justify-content: left;
+  }
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: var(--nine-color);
+  border-radius: 50%;
+  &.active {
+    background-color: var(--eight-color);
   }
 }
 
@@ -247,25 +243,26 @@ main {
   gap: 30px;
   padding: 0;
   margin-bottom: 20px;
-
-  .ButtonsPagination {
-    border: 1px solid var(--two-color);
-    border-radius: 50px;
-    width: 100px;
-    height: 35px;
-    color: var(--two-color);
-    cursor: pointer;
-  }
-
-  .pLiNK {
-    font-size: 20px;
-    color: var(--two-color);
-  }
-
   @media screen and (min-width: 700px) {
     gap: 50px;
   }
 }
+
+.buttons__pagination {
+  border: 1px solid var(--two-color);
+  border-radius: 50px;
+  width: 100px;
+  height: 35px;
+  color: var(--two-color);
+  background: none;
+  cursor: pointer;
+}
+
+.page__numeration{
+  font-size: 20px;
+  color: var(--two-color);
+}
+
 footer {
   display: flex;
   justify-content: center;
@@ -276,10 +273,6 @@ footer {
   background-size: cover;
   width: 100%;
   height: 80px;
-
-  .suazo {
-    z-index: 2;
-  }
 
   &::after {
     content: "";
@@ -293,4 +286,8 @@ footer {
     width: 100%;
     height: 80px;
   }
+}
+
+.suazo {
+  z-index: 2;
 }

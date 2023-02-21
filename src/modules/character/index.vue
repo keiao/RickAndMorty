@@ -3,21 +3,21 @@
     <header>
       <div class="header__content">
         <div class="logo">
-          <img src="../../assets/rick-and-morty.svg" class="rickAndMorty" alt="Rick and Morty">
+          <img src="../../assets/rick-and-morty.svg" class="rick_and_morty" alt="Rick and Morty">
         </div>
-  
+
         <div class="search">
           <div class="search__content">
-            <img class="searchIcon" v-on:click="searchData" src="../../assets/search.svg" alt="search">
-  
+            <img class="search__icon" v-on:click="searchData" src="../../assets/search.svg" alt="search">
+
             <input v-model="search" type="text" v-on:keyup.enter="searchData" placeholder="Buscar personaje" />
-            <img src="../../assets/filter.svg" class="filterIcon" alt="filter">
+            <img src="../../assets/filter.svg" class="filter__icon" alt="filter">
           </div>
         </div>
-  
-        <div class="filterDesplegable">
-          <button class="filterButton">
-            <span class="filterTextGreen">Filtro aplicados:</span>
+
+        <div class="dropdown__filter">
+          <button class="filter__button">
+            <span class="filter__textGreen">Filtro aplicados:</span>
             Status, Origin
           </button>
         </div>
@@ -27,32 +27,30 @@
       <Buttons @select="getCharacters" />
 
       <div class="cards">
+        <div v-for=" char in characters" :key="char.id" @click="toggleModal(char.id)" class="cards__container">
 
-        <div v-for=" char in characters" :key="char.id" @click="toggleModal(char.id)" class="cardsContainer">
-
-          <div class="characterImg">
+          <div class="card__img">
             <img :src="char.image" alt="charImg">
           </div>
 
-
-          <div class="cardsTexts">
-            <div class="cardStatus">
+          <div class="cards__texts">
+            <div class="card__status">
               <span :class="{ 'active': char.status === 'Alive' }" class="circle" />
               {{ char.status }} - {{ char.species }}
             </div>
-            <h5 class="cardName">{{ char.name }}</h5>
-            <p>Last known location:</p>
-            <p class="cardText">{{ char.location.name }}</p>
-            <p>First seen in:</p>
-            <p class="cardtext">{{ char.dimension }}</p>
+            <h5 class="card-Name">{{ char.name }}</h5>
+            <p class="card-Text">Last known location:</p>
+            <span>{{ char.location.name }}</span>
+            <p class="card-Text">First seen in:</p>
+            <span></span>
           </div>
         </div>
       </div>
 
       <nav class="pagination">
-        <button class="ButtonsPagination" v-on:click="prevPage">Anterior</button>
-        <a class="pLiNK">{{ page }}</a>    
-        <button class="ButtonsPagination" v-on:click="nextPage">Siguiente</button>
+        <button class="buttons__pagination" v-on:click="prevPage">Anterior</button>
+        <a class="page__numeration">{{ page }}</a>
+        <button class="buttons__pagination" v-on:click="nextPage">Siguiente</button>
       </nav>
     </main>
 
@@ -68,6 +66,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 import { characterClient } from "../../api";
+
 import Buttons from '../../components/main/buttons.vue'
 import ModalCharacter from './sections/modalCharacter.vue';
 

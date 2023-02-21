@@ -1,7 +1,7 @@
 <template>
   <div v-if="modalActive" class="modal">
-    <div class="modalContent">
-      <button @click="closeClick" type="button" class="closeButton">
+    <div class="modal__content">
+      <button @click="closeClick" type="button" class="close__button">
         <img src="../../assets/closet.svg">
       </button>
       <slot />
@@ -49,7 +49,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 20;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ export default {
   }
 }
 
-.modalContent {
+.modal__content {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -74,7 +74,7 @@ export default {
   }
 }
 
-.closeButton {
+.close__button {
   position: absolute;
   right: 10px;
   top: 10px;

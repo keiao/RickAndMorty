@@ -1,65 +1,65 @@
 <template>
   <modal @close="closeModal" :modalActive="modelValue" class="modalM">
 
-    <div class="portadaModal">
-      <img class="modalBanner" src="../../../assets/bgModal.png" alt="banner modal">
+    <div class="portada__modal">
+      <img class="modal__banner" src="../../../assets/bgModal.png" alt="banner modal">
     </div>
 
-    <div class="boxColor">
+    <div class="box__color">
       <div class="perfil">
-        <img class="circleImg" :src="character?.image" alt="characterImg">
-        <span class="perfilText">{{ character?.status }}</span>
-        <h3 class="perfilName">{{ character?.name }}</h3>
-        <span class="perfilText">{{ character?.species }}</span>
+        <img class="circle__img" :src="character?.image" alt="characterImg">
+        <span class="perfil__text">{{ character?.status }}</span>
+        <h3 class="perfil__name">{{ character?.name }}</h3>
+        <span class="perfil__text">{{ character?.species }}</span>
       </div>
     </div>
 
     <div class="content">
 
       <div class="information">
-        <h2 class="infoH2">Información</h2>
+        <h2 class="info__title">Información</h2>
 
-        <section class="infoContainer">
-          <div class="infoBorder">
-            <h5 class="infoName">
+        <section class="info__container">
+          <div class="info__border">
+            <h5 class="info__name">
               <img src="../../../assets/information.svg">
               Gender
             </h5>
-            <span class="infoText">{{ character?.gender }}</span>
+            <span class="info_-text">{{ character?.gender }}</span>
           </div>
 
-          <div class="infoBorder">
-            <h5 class="infoName">
+          <div class="info__border">
+            <h5 class="info__name">
               <img src="../../../assets/information.svg">
               Origin
             </h5>
-            <span class="infoText">{{ character?.origin?.name }}</span>
+            <span class="info-text">{{ character?.origin?.name }}</span>
           </div>
 
-          <div class="infoBorder">
-            <h5 class="infoName">
+          <div class="info__border">
+            <h5 class="info__name">
               <img src="../../../assets/information.svg">
               Type
             </h5>
-            <span class="infoText">{{ character?.type }}</span>
+            <span class="info-text">{{ character?.type }}</span>
           </div>
 
         </section>
       </div>
 
       <div class="episodios">
-        <h2 class="epiH2">Episodios</h2>
+        <h2 class="epi__title">Episodios</h2>
 
-        <section class="epiContainer">
-          <div v-for="(episode, index) in episodes" :key="episode.id" class="epiContent">
-            <div class="epiText">{{ episode.name }}</div>
-            <div class="epiEpisodios"> {{ episode.episode }}</div>
-            <div class="epiText"> {{ episode.air_date }}</div>
+        <section class="epi__container">
+          <div v-for="(episode, index) in episodes" :key="episode.id" class="epi__content">
+            <div class="epi-Text">{{ episode.name }}</div>
+            <div class="epi-Episodios"> {{ episode.episode }}</div>
+            <div class="epi-Text"> {{ episode.air_date }}</div>
           </div>
         </section>
       </div>
     </div>
-    <button class="mdButton">Compartir personaje</button>
+    <button class="button">Compartir personaje</button>
 
   </modal>
 </template>
@@ -125,7 +125,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.portadaModal {
+.portada__modal {
   position: relative;
 
   &::after {
@@ -147,7 +147,7 @@ export default {
 
 }
 
-.modalBanner {
+.modal__banner {
   object-fit: cover;
   object-position: center;
   height: 150px;
@@ -157,7 +157,7 @@ export default {
   }
 }
 
-.boxColor {
+.box__color {
   position: static;
   z-index: 10;
   background-color: var(--six-color);
@@ -178,39 +178,40 @@ export default {
   z-index: 2;
   margin-top: -100px;
 
-  .circleImg {
-    border-radius: 50%;
-    width: 120px;
-    height: auto;
-    border: 5px solid var(--one-color);
-  }
-
-  .perfilName {
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  .perfilText {
-    font-size: 13px;
-    color: var(--seven-color);
-  }
-
   @media screen and (min-width: 700px) {
     margin-top: -120px;
-
-    .circleImg {
-      width: 155px;
-    }
-
-    .perfilName {
-      font-size: 20px;
-    }
-
-    .perfilText {
-      font-size: 14px;
-    }
   }
 }
+
+.circle__img {
+  border-radius: 50%;
+  width: 120px;
+  height: auto;
+  border: 5px solid var(--one-color);
+
+  @media screen and (min-width: 700px) {
+    width: 155px;
+  }
+}
+
+.perfil__name {
+  font-size: 15px;
+  font-weight: 600;
+
+  @media screen and (min-width: 700px) {
+    font-size: 20px;
+  }
+}
+
+.perfil__text {
+  font-size: 13px;
+  color: var(--seven-color);
+
+  @media screen and (min-width: 700px) {
+    font-size: 14px;
+  }
+}
+
 
 .information {
   display: flex;
@@ -219,63 +220,64 @@ export default {
   border-bottom: 1px solid var(--five-color);
   width: 300px;
 
-  .infoContainer {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-  }
-
-  .infoH2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-
-  .infoBorder {
-    border: 1px solid var(--five-color);
-    padding: 10px 10px;
-    border-radius: 8px;
-  }
-
-  .infoName {
-    font-size: 11px;
-    color: var(--seven-color);
-    display: flex;
-    align-items: center;
-    gap: 3px;
-  }
-
-  .infoText {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
   @media screen and (min-width: 700px) {
     display: block;
     padding: 20px 0px 30px 0px;
     width: 650px;
-
-    .infoContainer {
-      justify-content: space-around;
-      flex-direction: row;
-    }
-
-    .infoH2 {
-      font-size: 23px;
-      margin-left: -20px;
-    }
-
-    .infoBorder {
-      border: 1px solid var(--five-color);
-      padding: 15px 40px;
-      border-radius: 8px;
-    }
-
-    .infoText {
-      font-size: 17px;
-      font-weight: 500;
-    }
   }
 }
+
+.info__container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  @media screen and (min-width: 700px) {
+    justify-content: space-around;
+    flex-direction: row;
+  }
+}
+
+.info__title {
+  font-size: 18px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 700px) {
+    font-size: 23px;
+    margin-left: -20px;
+  }
+}
+
+.info__border {
+  border: 1px solid var(--five-color);
+  padding: 10px 10px;
+  border-radius: 8px;
+
+  @media screen and (min-width: 700px) {
+    border: 1px solid var(--five-color);
+    padding: 15px 40px;
+    border-radius: 8px;
+  }
+}
+
+.info__name {
+  font-size: 11px;
+  color: var(--seven-color);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.info-text {
+  font-size: 14px;
+  font-weight: 500;
+
+  @media screen and (min-width: 700px) {
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+
 
 .episodios {
   display: flex;
@@ -283,20 +285,32 @@ export default {
   padding: 20px 0px 30px 0px;
   border-bottom: 1px solid var(--five-color);
   width: 300px;
+  @media screen and (min-width: 700px) {
+    display: block;
+    width: 650px;
+  }
+}
 
-  .epiContainer {
+  .epi__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    @media screen and (min-width: 700px) {
+      grid-template-columns: repeat(4, 1fr)
+  }
   }
 
-  .epiH2 {
+  .epi__title {
     font-size: 18px;
     margin-bottom: 20px;
-
+    @media screen and (min-width: 700px) {
+      font-size: 23px;
+      margin-left: -20px;
+      margin-bottom: 20px;
+  }
   }
 
-  .epiContent {
+  .epi__content {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -305,44 +319,45 @@ export default {
     padding: 15px;
   }
 
-  .epiText {
+  .epi-Text {
     font-size: 11px;
     color: var(--seven-color);
+    @media screen and (min-width: 700px) {
+      width: 100%;
+  }
   }
 
-  .epiEpisodios {
+  .epi-Episodios {
     font-size: 16px;
     font-weight: 500;
     gap: 5;
-  }
-
-  @media screen and (min-width: 700px) {
-    display: block;
-    width: 650px;
-
-    .epiContainer {
-      grid-template-columns: repeat(4, 1fr)
-    }
-
-    .epiH2 {
-      font-size: 23px;
-      margin-left: -20px;
-      margin-bottom: 20px;
-    }
-
-    .epiText {
-      width: 100%;
-    }
-
-    .epiEpisodios {
+    @media screen and (min-width: 700px) {
       font-size: 18px;
       font-weight: 500;
-    }
   }
-}
+  }
 
 
-.mdButton {
+
+    .epi__container {
+     
+    }
+
+    .epi__title {
+     
+    }
+
+    .epi-Text {
+     
+    }
+
+    .epi-Episodios {
+      
+    }
+
+
+
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
