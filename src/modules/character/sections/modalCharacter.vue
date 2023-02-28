@@ -285,77 +285,62 @@ export default {
   padding: 20px 0px 30px 0px;
   border-bottom: 1px solid var(--five-color);
   width: 300px;
+
   @media screen and (min-width: 700px) {
     display: block;
     width: 650px;
   }
 }
 
-  .epi__container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    @media screen and (min-width: 700px) {
-      grid-template-columns: repeat(4, 1fr)
-  }
-  }
+.epi__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 
-  .epi__title {
-    font-size: 18px;
+  @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(4, 1fr)
+  }
+}
+
+.epi__title {
+  font-size: 18px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 700px) {
+    font-size: 23px;
+    margin-left: -20px;
     margin-bottom: 20px;
-    @media screen and (min-width: 700px) {
-      font-size: 23px;
-      margin-left: -20px;
-      margin-bottom: 20px;
   }
-  }
+}
 
-  .epi__content {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    border: 1px solid var(--five-color);
-    border-radius: 8px;
-    padding: 15px;
-  }
+.epi__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid var(--five-color);
+  border-radius: 8px;
+  padding: 15px;
+}
 
-  .epi-Text {
-    font-size: 11px;
-    color: var(--seven-color);
-    @media screen and (min-width: 700px) {
-      width: 100%;
-  }
-  }
+.epi-Text {
+  font-size: 11px;
+  color: var(--seven-color);
 
-  .epi-Episodios {
-    font-size: 16px;
+  @media screen and (min-width: 700px) {
+    width: 100%;
+  }
+}
+
+.epi-Episodios {
+  font-size: 16px;
+  font-weight: 500;
+  gap: 5;
+
+  @media screen and (min-width: 700px) {
+    font-size: 18px;
     font-weight: 500;
-    gap: 5;
-    @media screen and (min-width: 700px) {
-      font-size: 18px;
-      font-weight: 500;
   }
-  }
-
-
-
-    .epi__container {
-     
-    }
-
-    .epi__title {
-     
-    }
-
-    .epi-Text {
-     
-    }
-
-    .epi-Episodios {
-      
-    }
-
-
+}
 
 .button {
   display: flex;
