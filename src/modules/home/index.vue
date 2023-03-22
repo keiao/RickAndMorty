@@ -13,9 +13,6 @@
         Continuar
       </m-button>
     </div>
-    <h3>
-      prueba
-    </h3>
   </div>
 </template>
 
@@ -66,7 +63,7 @@ export default {
   }
 
   @media screen and (min-width: 700px) {
-    background-image: url('../../assets/welcome.jpg');
+    background-image: url('../../assets/welcome_desktop.jpg');
     padding: 30px 25px;
   }
 }
