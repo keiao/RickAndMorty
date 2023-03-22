@@ -12,7 +12,6 @@
       <m-button class="button" @click="onClick">
         Continuar
       </m-button>
-
     </div>
   </div>
 </template>
