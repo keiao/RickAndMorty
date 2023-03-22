@@ -63,7 +63,7 @@ export default {
   }
 
   @media screen and (min-width: 700px) {
-    background-image: url('../../assets/welcome_desktop.jpg');
+    background-image: url('../../assets/welco.jpg');
     padding: 30px 25px;
   }
 }
