@@ -13,6 +13,9 @@
         Continuar
       </m-button>
     </div>
+    <h3>
+      prueba
+    </h3>
   </div>
 </template>
 
